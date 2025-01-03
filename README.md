@@ -1,50 +1,69 @@
-# React + TypeScript + Vite
+# Top Interview 150 Progress Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React application built with TypeScript and Vite. It tracks and displays your progress in solving the top 150 interview questions from LeetCode.
 
-Currently, two official plugins are available:
+## Project Goal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The goal of this project is to show the current progress in solving the 150 must-do questions for interview preparation from [LeetCode](https://leetcode.com/studyplan/top-interview-150/).
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Node.js (version 16 or higher)
+- Docker (for running the proxy server)
 
-- Configure the top-level `parserOptions` property like this:
+## Setup
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Clone the repository:
+
+```sh
+git clone <repository-url>
+cd <repository-directory>
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Install dependencies:
+```sh
+npm install
 ```
+
+3. Start the proxy server:
+
+  The proxy server is necessary to handle GraphQL requests to LeetCode. You can start it using Docker:
+
+```sh
+cd proxyServer
+docker-compose up -d
+```
+
+Make sure to set the LEETCODE_SESSION and CSRFTOKEN environment variables in .env file located in the proxyServer directory.
+
+4. Start the development server:
+```sh
+npm run dev
+``` 
+
+The application will be available at http://localhost:3000.
+
+### Project Structure
+## Project Structure
+
+- `src`: Contains the source code of the React application.
+  - `components/`: Contains the React components.
+    - `card/`: Contains the Card component.
+    - `scoreHeader/`: Contains the ScoreHeader component.
+  - `hooks/`: Contains custom hooks.
+    - `src/hooks/useQuestionStats.tsx`: Custom hook to fetch question stats.
+  - `queries/`: Contains GraphQL queries.
+    - `src/queries/studyPlan.tsx`: GraphQL query for fetching study plan progress.
+- `proxyServer`: Contains the proxy server code and configuration.
+  - `proxyServer/.env`: Environment variables for the proxy server.
+  - `proxyServer/docker-compose.yml`: Docker Compose configuration.
+  - `proxyServer/Dockerfile`: Dockerfile for the proxy server.
+  - `proxyServer/server.js`: Proxy server implementation.
+- `public`: Contains static assets.
+- `index.html`: The main HTML file.
+- `package.json`: The project configuration and dependencies.
+- `tsconfig.json`: TypeScript configuration.
+- `vite.config.ts`: Vite configuration.
+- `tailwind.config.js`: Tailwind CSS configuration.
+- `postcss.config.js`: PostCSS configuration.
+- `eslint.config.js`: ESLint configuration.
