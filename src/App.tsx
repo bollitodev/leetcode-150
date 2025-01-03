@@ -1,9 +1,19 @@
+import { useQuery } from "@apollo/client";
+
 import './App.css';
 import Card from './components/card';
 import ScoreHeader from './components/scoreHeader';
-
+import { GET_INTERVIEW_PREP_PROBLEMS } from './queries/studyPlan';
 
 function App() {
+
+  const { loading, error, data } = useQuery(GET_INTERVIEW_PREP_PROBLEMS, {
+    variables: { slug: 'top-interview-150' },
+  });
+
+  console.log(data);
+  console.log(loading);
+  console.log(error);
 
   return (
     <div className='flex justify-center items-center h-screen bg-black flex-wrap'>
