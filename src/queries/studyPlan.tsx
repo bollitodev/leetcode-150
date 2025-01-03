@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_INTERVIEW_PREP_PROBLEMS = gql`
-    query studyPlanProgress($slug: String!, $historyId: ID) {
-        studyPlanV2ProgressDetail(planSlug: $slug, id: $historyId) {
+    query studyPlanProgress($slug: String!) {
+        studyPlanV2ProgressDetail(planSlug: $slug) {
             id
             status
             weeklyTaskScheduleResettable
