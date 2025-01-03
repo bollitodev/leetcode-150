@@ -1,5 +1,5 @@
 interface CardProps {
-    solvedQuestions: number;
+    solvedQuestions?: number;
     category: string;
 }
 

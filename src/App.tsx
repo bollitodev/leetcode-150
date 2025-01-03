@@ -1,9 +1,11 @@
 import './App.css';
 import Card from './components/card';
 import ScoreHeader from './components/scoreHeader';
-
+import { useQuestionStats } from './hooks/useQuestionStats';
 
 function App() {
+
+  const { solvedQuestions, solvedEasyQuestions, solvedMediumQuestions, solvedHardQuestions, loading, error } = useQuestionStats('top-interview-150');
 
   return (
     <div className='flex justify-center items-center h-screen bg-black flex-wrap'>
@@ -12,14 +14,14 @@ function App() {
         <p className="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Must-do questions for interview prep from  <a href='https://leetcode.com/studyplan/top-interview-150/' target='_blank'>Leetcode.com</a> </p>
       </div>
 
-      <ScoreHeader totalQuestions={150} answeredQuestions={8} />
+      <ScoreHeader totalQuestions={150} solvedQuestions={solvedQuestions} />
 
       <div className='w-full p-4 flex justify-center items-center'>
-        <Card solvedQuestions={10} category='Easy'/>
-        <Card solvedQuestions={10} category='Medium'/>
-        <Card solvedQuestions={10} category='Hard'/>
+        <Card solvedQuestions={solvedEasyQuestions} category='Easy' />
+        <Card solvedQuestions={solvedMediumQuestions} category='Medium' />
+        <Card solvedQuestions={solvedHardQuestions} category='Hard' />
       </div>
-   
+
     </div>
   )
 }
